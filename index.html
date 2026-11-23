@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lidl-Trek Shoot Plan by Unit</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* One day, vertical time ruler, three lanes: B-roll · Interviews · Client */
+  --bg:#f4f5f2; --surface:#fff; --ink:#15191c; --muted:#5d666c; --line:#dcdfdb;
+  --broll:#d2401f; --int:#1d3fbf; --client:#8a6d00; --route:#0f7a55; --k-route:#d3f0e3;
+  --k-broll:#ffe3d8; --k-int:#dce5ff; --k-client:#fff1c2; --k-spot:#ead9ff; --k-break:#eceeec; --night:#e3e6ea;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif; --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --hour:120px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111416; --surface:#1a1e21; --ink:#eef1f2; --muted:#9aa4aa; --line:#2c3337;
+  --broll:#ff8a6b; --int:#7c98ff; --client:#e3c25a; --route:#4fd1a0; --k-route:#17402f;
+  --k-broll:#4d2418; --k-int:#22305e; --k-client:#45390f; --k-spot:#3a2a5c; --k-break:#262b2e; --night:#22282c; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#111416; --surface:#1a1e21; --ink:#eef1f2; --muted:#9aa4aa; --line:#2c3337;
+  --broll:#ff8a6b; --int:#7c98ff; --client:#e3c25a; --route:#4fd1a0; --k-route:#17402f;
+  --k-broll:#4d2418; --k-int:#22305e; --k-client:#45390f; --k-spot:#3a2a5c; --k-break:#262b2e; --night:#22282c; color-scheme:dark;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.4}
+.wrap{max-width:900px;margin:0 auto;padding:22px 14px 40px;display:flex;flex-direction:column;gap:18px}
+h1{font-family:var(--display);font-weight:800;font-size:26px;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+.pill{display:inline-block;margin-top:8px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.who{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.who div{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:8px;padding:8px 10px;font-size:13px}
+.who b{display:block;font-family:var(--display);color:var(--c);font-size:14px}
+.board{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 10px 16px}
+.grid{display:grid;grid-template-columns:38px 1fr 1fr .45fr;gap:0 6px}
+.head{font-family:var(--display);font-size:12px;font-weight:600;color:#fff;background:var(--c);padding:6px 7px;border-radius:6px 6px 0 0}
+.ruler,.lane{position:relative;height:calc(var(--hour)*12)}
+.ruler span{position:absolute;right:4px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;transform:translateY(-50%)}
+.lane{background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--hour) - 1px),var(--line) calc(var(--hour) - 1px),var(--line) var(--hour));border:1px solid var(--line);border-top:0}
+.dark{position:absolute;right:0;width:5px;border-radius:3px;background:#3b4256;opacity:.55}
+.sunl{position:absolute;right:8px;font-size:9px!important;color:var(--muted);transform:none!important}
+.b{position:absolute;left:4px;right:4px;border-radius:7px;padding:5px 7px;background:var(--k);border-left:4px solid var(--c);overflow:hidden}
+.b .t{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.b .w{font-weight:600;font-size:13px}
+.b .n{font-size:11px;color:var(--muted)}
+.cam{display:inline-block;margin-top:3px;font-size:10px;font-weight:600;padding:1px 6px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
+.q{display:block;margin-top:4px;font-size:11px;font-weight:600;padding:2px 6px;border-radius:5px;background:#ffd84d;color:#3a2f00;width:fit-content}
+.tbc{border:1.5px dashed var(--c);border-left:4px solid var(--c)}
+.b.one .t{display:inline;margin-right:5px}.b.one .w{display:inline}
+.notes{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.notes h2{font-family:var(--display);font-size:15px;margin:0 0 6px}
+.notes ul{margin:0;padding-left:18px}
+@media (max-width:560px){.who{grid-template-columns:1fr}.b .w{font-size:12px}.b .n{font-size:10px}.head{font-size:11px;padding:5px}}
+.kv{display:flex;flex-wrap:wrap;gap:8px}
+.kv details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 10px;flex:1 1 220px}
+.kv summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:14px}
+.kv summary span{font-family:var(--body);font-weight:400;font-size:12px;color:var(--muted);margin-left:6px}
+.kv ul{margin:6px 0 2px;padding-left:18px;font-size:13px}
+.kv li{margin:2px 0}
+h2.day{font-family:var(--display);font-size:22px;margin:14px 0 2px}
+.grid4{grid-template-columns:38px 1fr 1fr 1fr .45fr}
+.lane.small .b{padding:4px 5px}.lane.small .b .w{font-size:11px}.lane.small .b .n,.lane.small .b .t{font-size:10px}
+.sl{margin-left:8px;font:600 10px/1 inherit;padding:3px 7px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:inherit;cursor:pointer;vertical-align:middle}
+.sl:hover{border-color:currentColor}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99;padding:16px;cursor:zoom-out}
+#lb.on{display:flex}#lb img{max-width:100%;max-height:100%;border-radius:6px}
+.b,.b *{overflow-wrap:anywhere;word-break:break-word;hyphens:auto}.b .q{max-width:100%;box-sizing:border-box}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Lidl-Trek Training Camp · Shoot plan</h1>
+  <p class="sub">Dénia Marriott La Sella, Jesús Pobre · first light ~7:35 · sunrise ~8:05 · sunset 17:37</p>
+  <span class="pill">Draft · dashed = not confirmed · yellow tags = questions for Lidl-Trek</span>
+</header>
+<section class="who">
+  <div style="--c:var(--broll)"><b>B-roll unit</b>Nico Hidalgo · Pablo Terzagui</div>
+  <div style="--c:var(--int)"><b>Interview unit</b>Pau Colomina · Raúl Sánchez (DP) · Roberto Almela · Adrià</div>
+  <div style="--c:#7b4bd6"><b>Photo</b>Arnau</div>
+  <div style="--c:var(--client)"><b>Client</b>Umara · Norys · Paul</div>
+</section>
+<section><h2 class="day">Key visuals</h2><div class="kv"><details><summary>Rider POV<button class="sl" data-img="slides/rider-pov.jpg" type="button">Slide</button><span>Nico</span></summary><ul><li>Bike-mounted POV during practice runs</li><li>Off training only: a bike with the mechanics, to coordinate with Lidl-Trek</li><li>Cameras on the bike: rider's face, body, footwork and the bike's motion</li></ul></details><details><summary>In Action<button class="sl" data-img="slides/in-action.jpg" type="button">Slide</button><span>Pau / Raúl · Nico to keep in mind</span></summary><ul><li>Wide aerial shots of riders training</li><li>Riders mounting bikes, framed the same way for match-cuts</li><li>Pre-ride warm-ups, stretching and routines</li><li>Dynamic mid and close-ups of riders in motion</li><li>Tracking, pans, cameras ahead of, alongside or behind riders</li></ul></details><details><summary>Spotlights<button class="sl" data-img="slides/spotlights.jpg" type="button">Slide</button><span>Nico (stolen) · Pau (directed) · Arnau</span></summary><ul><li>Hero shots of individual riders and the team, stills and video</li><li>Bold, confident poses for stills</li><li>Candid and composed moments that show personalities</li><li>Low angles, tight close-ups, cinematic framing</li><li>Both days: stolen (Nico) and directed (Pau) before riders leave · Pau also gets 5 min with each interviewee near the set</li></ul></details><details><summary>One-on-Ones<button class="sl" data-img="slides/one-on-ones.jpg" type="button">Slide</button><span>Pau · Nico</span></summary><ul><li>Interviews with riders and staff</li><li>Same framing, light and setup for everyone</li><li>Medium and close-up shots, dynamic angles, supporting B-roll</li></ul></details><details><summary>Beyond Performance<button class="sl" data-img="slides/beyond-performance.jpg" type="button">Slide</button><span>Nico</span></summary><ul><li>Mechanics servicing bikes, close-ups of tools and hands</li><li>Chain-waxing stations and bike storage</li><li>Physios treating or preparing riders</li><li>Nutritionists setting up plans</li><li>Coaches briefing riders and staff</li><li>Support staff preparing vehicles, gear and equipment</li><li>Staff using laptops, tablets and screens</li></ul></details><details><summary>Group Moments<button class="sl" data-img="slides/group-moments.jpg" type="button">Slide</button><span>Nico</span></summary><ul><li>Banter and candid interactions between riders and staff</li><li>Wide shots, close-ups and reactions</li></ul></details><details><summary>Environment<button class="sl" data-img="slides/environment.jpg" type="button">Slide</button><span>Raúl (drone)</span></summary><ul><li>Drone over winding roads, climbs and coast</li><li>Scenic pans of hills and sea</li><li>Moving vehicle shots of the open roads</li><li>Riders on climbs and winding roads</li><li>Wide establishing shots of the training camp</li></ul></details><details><summary>3 focuses<button class="sl" data-img="slides/three-focuses.jpg" type="button">Slide</button><span>Everyone</span></summary><ul><li>Moves that start or end on the ServiceNow logo, or camera locked on the logo</li><li>Any screen or device used by the team, close and cinematic</li><li>Macros of effort: focused eyes, sweat, muscles straining</li></ul></details></div></section>
+<section><h2 class="day">Monday 7</h2><p class="sub">Hotel B-roll + interviews part 1</p><div class="board"><div class="grid" data-s="6" data-e="18"><div></div><div class="head" style="--c:var(--broll)">B-roll · Nico</div><div class="head" style="--c:var(--int)">Interviews · Pau</div><div class="head" style="--c:var(--client)">Client</div><div class="ruler"></div><div class="lane" data-b='[
+    ["6:00", "6:30", "Crew call · set-up", "Nico, Pablo, Arnau · cameras and client monitor ready", "break", 0, 0, ""],
+    ["6:30", "8:30", "Beyond Performance", "Mechanics servicing bikes, chain-waxing, vans and gear being prepared, staff getting the day ready", "broll", 1, 0, ""],
+    ["8:30", "9:30", "Spotlights", "Stolen moments · before riders leave to train", "spot", 1, 1, "When do riders leave to train?"],
+    ["9:30", "12:30", "In Action (option)", "Proposal: Nico and Pablo follow the peloton by motorbike or car while the first interviews run", "broll", 1, 1, "Can we follow the training on Monday?"],
+    ["12:30", "13:30", "Lunch", "All units together", "break", 0, 1, ""],
+    ["13:30", "16:00", "Open B-roll", "To define once we know what riders do after training", "broll", 1, 1, ""],
+    ["16:00", "17:00", "Wrap", "Load-out", "break", 0, 0, ""]
+  ]'></div><div class="lane" data-b='[
+    ["6:00", "7:00", "Help the B-roll unit", "Raúl + Roberto: set-up and client monitoring", "break", 0, 0, ""],
+    ["7:00", "8:30", "Interview set build", "Raúl + Roberto light and test · Pau joins ~7:00 · Adrià arrives later (TBC), before the first interview", "break", 0, 1, ""],
+    ["8:30", "9:30", "Spotlights", "Directed moments · before riders leave to train", "spot", 1, 1, ""],
+    ["9:30", "10:00", "Back to the set", "Final checks for the first interview", "break", 0, 0, ""],
+    ["10:00", "11:00", "Interview · Andy Schleck", "CEO · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["11:00", "11:15", "Set change", "", "break", 0, 0, ""],
+    ["11:15", "12:15", "Interview · Grischa Niermann", "Chief Sporting Officer · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["12:15", "12:30", "Set change", "", "break", 0, 0, ""],
+    ["12:30", "13:30", "Lunch", "All units together", "break", 0, 1, ""],
+    ["13:30", "13:45", "Reset", "", "break", 0, 0, ""],
+    ["13:45", "14:45", "Interview · Mads Pedersen", "Rider · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["14:45", "15:00", "Set change", "", "break", 0, 0, ""],
+    ["15:00", "16:00", "Interview · Kasia Niewiadoma", "Rider · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["16:00", "16:15", "Set change", "", "break", 0, 0, ""],
+    ["16:15", "17:15", "Extra interview slot (optional)", "Backup slot if needed", "int", 1, 1, ""],
+    ["17:15", "17:45", "Wrap", "Strike the set, load-out", "break", 0, 0, ""]
+  ]'></div><div class="lane" data-b='[
+    ["~6:30", "8:30", "With the B-roll unit", "Vito from Nomada House (Bea)", "client", 0, 1, "Client arrival time?"],
+    ["8:30", "9:30", "Spotlights", "With both units", "client", 0, 1, ""],
+    ["9:30", "10:00", "To the interview set", "", "client", 0, 0, ""],
+    ["10:00", "12:30", "Supervising interviews", "", "client", 0, 0, ""],
+    ["12:30", "13:30", "Lunch", "All units together", "break", 0, 1, ""],
+    ["13:30", "17:15", "Supervising interviews", "", "client", 0, 0, ""],
+    ["17:15", "17:45", "Wrap", "Vito back to Nomada House", "break", 0, 0, ""]
+  ]'></div></div></div></section>
+<section><h2 class="day">Tuesday 8</h2><p class="sub">Option A · no overlap · interviews after the ride</p><div class="board"><div class="grid grid4" data-s="6.5" data-e="17.5"><div></div><div class="head" style="--c:var(--broll)">B-roll · Nico</div><div class="head" style="--c:var(--route)">Route · Raúl, Arnau, Javi</div><div class="head" style="--c:var(--int)">Interviews · Pau</div><div class="head" style="--c:var(--client)">Client</div><div class="ruler"></div><div class="lane" data-b='[
+    ["6:30", "7:00", "Crew call · set-up", "Nico, Pablo, Arnau · cameras and client monitor ready", "break", 0, 0, ""],
+    ["7:00", "8:30", "Beyond Performance", "Bikes prepped for ~20 riders, coaches’ briefing", "broll", 1, 0, ""],
+    ["8:30", "9:30", "Spotlights", "Stolen moments · riders mounting bikes and rolling out", "spot", 1, 1, "Riders available at 9:00?"],
+    ["9:30", "12:30", "Rider POV · off training", "A bike with the mechanics, away from the training ride · plus open B-roll at the camp", "broll", 0, 1, "Bike and mechanic available for POV?"],
+    ["12:30", "13:30", "Lunch", "All units together", "break", 0, 1, ""],
+    ["13:30", "16:30", "Open B-roll", "To define", "broll", 1, 1, ""],
+    ["16:30", "17:30", "Wrap", "Load-out", "break", 0, 0, ""]
+  ]'></div><div class="lane" data-b='[
+    ["8:00", "9:00", "Drone + motorbike prep", "Raúl, Arnau, Javi", "break", 0, 0, ""],
+    ["9:00", "11:00", "Group ride · Environment + In Action", "Marriott → Coll de Rates via Tàrbena · stretches of drone (Raúl), moto video (Raúl), moto photo (Arnau)", "route", 1, 1, "Exact route and timing?"],
+    ["11:00", "11:30", "Back to the hotel", "No filming", "break", 0, 0, ""],
+    ["12:30", "13:30", "Lunch", "All units together", "break", 0, 1, ""]
+  ]'></div><div class="lane" data-b='[
+    ["8:30", "9:30", "Spotlights", "Pau call 8:00 · directed moments before riders leave to train", "spot", 1, 0, "Roberto call time?"],
+    ["9:30", "11:40", "Interview set build", "Pau + Roberto · while Raúl and Arnau are on the ride", "break", 0, 0, ""],
+    ["11:40", "12:30", "Interview · Koen de Kort", "Head of Technical & Innovation · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["12:30", "13:30", "Lunch", "All units together", "break", 0, 1, ""],
+    ["13:30", "13:45", "Reset", "", "break", 0, 0, ""],
+    ["13:45", "14:35", "Interview · Moritz Bock", "CMO · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["14:35", "14:50", "Set change", "", "break", 0, 0, ""],
+    ["14:50", "15:40", "Interview · Niamh Fisher-Black", "Rider · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["15:40", "15:55", "Set change", "", "break", 0, 0, ""],
+    ["15:55", "16:45", "Interview · Juan Ayuso", "Rider · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["16:45", "17:15", "Wrap", "Strike the set, load-out", "break", 0, 0, ""]
+  ]'></div><div class="lane" data-b='[
+    ["~7:00", "8:30", "With the B-roll unit", "", "client", 0, 1, ""],
+    ["8:30", "9:30", "Spotlights", "With both units", "client", 0, 1, ""],
+    ["9:00", "11:40", "Following the ride", "In the Vito (Bea)", "client", 0, 1, ""],
+    ["11:40", "12:30", "Supervising interviews", "", "client", 0, 0, ""],
+    ["12:30", "13:30", "Lunch", "All units together", "break", 0, 1, ""],
+    ["13:30", "16:45", "Supervising interviews", "", "client", 0, 0, ""],
+    ["16:45", "17:15", "Wrap", "Transfer to Valencia for Paul and Norys", "break", 0, 0, ""]
+  ]'></div></div></div></section>
+<section><h2 class="day">Tuesday 8 · option B</h2><p class="sub">Split units · only Koen runs without Raúl and Arnau</p><div class="board"><div class="grid grid4" data-s="6.5" data-e="17.5"><div></div><div class="head" style="--c:var(--broll)">B-roll · Nico</div><div class="head" style="--c:var(--route)">Route · Raúl, Arnau, Javi</div><div class="head" style="--c:var(--int)">Interviews · Pau</div><div class="head" style="--c:var(--client)">Client</div><div class="ruler"></div><div class="lane" data-b='[
+    ["6:30", "7:00", "Crew call · set-up", "Nico, Pablo, Arnau · cameras and client monitor ready", "break", 0, 0, ""],
+    ["7:00", "8:30", "Beyond Performance", "Bikes prepped for ~20 riders, coaches’ briefing", "broll", 1, 0, ""],
+    ["8:30", "9:30", "Spotlights", "Stolen moments · riders mounting bikes and rolling out", "spot", 1, 1, "Riders available at 9:00?"],
+    ["9:30", "12:00", "Rider POV · off training", "Nico · Pablo joins the Koen interview 9:30–10:35, then back with Nico", "broll", 0, 1, "Bike and mechanic available for POV?"],
+    ["12:00", "13:00", "Lunch", "All units together", "break", 0, 1, ""],
+    ["13:00", "16:30", "Open B-roll", "To define", "broll", 1, 1, ""],
+    ["16:30", "17:30", "Wrap", "Load-out", "break", 0, 0, ""]
+  ]'></div><div class="lane" data-b='[
+    ["8:00", "9:00", "Drone + motorbike prep", "Raúl, Arnau, Javi", "break", 0, 0, ""],
+    ["9:00", "11:00", "Group ride · Environment + In Action", "Marriott → Coll de Rates via Tàrbena · drone (Raúl), moto video (Raúl), moto photo (Arnau)", "route", 1, 1, "Exact route and timing?"],
+    ["11:00", "12:00", "Back to the hotel", "By van, no filming", "break", 0, 1, ""],
+    ["12:00", "13:00", "Lunch", "All units together", "break", 0, 1, ""]
+  ]'></div><div class="lane" data-b='[
+    ["6:30", "8:00", "Interview set build", "Raúl + Roberto light it 100% before Raúl leaves", "break", 0, 0, ""],
+    ["8:30", "9:30", "Spotlights", "Pau · directed moments before riders leave", "spot", 1, 1, ""],
+    ["9:30", "9:45", "Reset", "", "break", 0, 0, ""],
+    ["9:45", "10:35", "Interview · Koen de Kort", "Only overlap · Pau, Pablo, Roberto, Adrià + agency", "int", 0, 0, ""],
+    ["10:35", "12:00", "Free", "Pablo back to B-roll", "break", 0, 1, ""],
+    ["12:00", "13:00", "Lunch", "All units together", "break", 0, 1, "Hotel restaurant can serve lunch at 12:00?"],
+    ["13:00", "13:50", "Interview · Moritz Bock", "CMO · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["13:50", "14:05", "Set change", "", "break", 0, 0, ""],
+    ["14:05", "14:55", "Interview · Niamh Fisher-Black", "Rider · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["14:55", "15:10", "Set change", "", "break", 0, 0, ""],
+    ["15:10", "16:00", "Interview · Juan Ayuso", "Rider · starts with a 5-min directed Spotlight near the set", "int", 1, 0, ""],
+    ["16:00", "16:30", "Wrap", "Strike the set, load-out", "break", 0, 0, ""]
+  ]'></div><div class="lane" data-b='[
+    ["~7:00", "8:30", "With the B-roll unit", "", "client", 0, 1, ""],
+    ["8:30", "9:30", "Spotlights", "", "client", 0, 1, ""],
+    ["9:00", "12:00", "Split", "Interviews / ride · who goes where TBC", "client", 0, 1, ""],
+    ["12:00", "13:00", "Lunch", "All units together", "break", 0, 1, ""],
+    ["13:00", "16:00", "Supervising interviews", "", "client", 0, 0, ""],
+    ["16:00", "16:30", "Wrap", "Transfer to Valencia for Paul and Norys", "break", 0, 0, ""]
+  ]'></div></div></div></section>
+</div>
+<div id="lb"><img alt=""></div>
+<script>
+const lb=document.getElementById("lb");lb.onclick=()=>lb.classList.remove("on");document.addEventListener("keydown",e=>{if(e.key==="Escape")lb.classList.remove("on")});document.querySelectorAll(".sl").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();lb.querySelector("img").src=b.dataset.img;lb.classList.add("on")}));
+const BASE=140;
+const m=s=>{s=s.replace("~","");const[h,mi]=s.split(":").map(Number);return h*60+mi};
+const lab=v=>Math.floor(v)+":"+(v%1?"30":"00");
+const kc={broll:"var(--broll)",int:"var(--int)",client:"var(--client)",route:"var(--route)",spot:"#7b4bd6",break:"var(--line)"};
+function draw(g,H){
+  const S=+g.dataset.s,E=+g.dataset.e,y=s=>(m(s)-S*60)/60*H,tot=(E-S)*H;
+  const ls=g.querySelectorAll(".lane");ls[ls.length-1].classList.add("small");
+  const r=g.querySelector(".ruler");r.innerHTML="";r.style.height=tot+"px";
+  const marks=[S];for(let h=Math.ceil(S+0.01);h<=E;h++)marks.push(h);if(E%1)marks.push(E);
+  [...new Set(marks)].forEach(v=>{const e=document.createElement("span");e.style.top=((v-S)*H)+"px";e.textContent=lab(v);r.appendChild(e)});
+  let need=0;
+  ls.forEach(l=>{
+    l.querySelectorAll(".b").forEach(x=>x.remove());
+    l.style.height=tot+"px";
+    JSON.parse(l.dataset.b).forEach(([a,b,w,n,k,photo,tbc,q])=>{
+      const el=document.createElement("div");el.className="b"+(tbc?" tbc":"");
+      const hrs=(m(b)-m(a))/60;
+      el.style.top=(y(a)+2)+"px";el.style.height=(y(b)-y(a)-4)+"px";
+      el.style.setProperty("--k","var(--k-"+k+")");el.style.setProperty("--c",kc[k]);
+      if(hrs<=0.34)el.classList.add("one");
+      el.innerHTML='<div class="t">'+a+'–'+b+'</div><div class="w">'+w+'</div>'+(q?'<span class="q">? '+q+'</span>':'')+(n?'<div class="n">'+n+'</div>':'')+(photo?'<span class="cam">Arnau · photo</span>':'');
+      l.appendChild(el);
+      if(el.scrollHeight>el.clientHeight+1)need=Math.max(need,(el.scrollHeight+6)/hrs);
+    });
+  });
+  return need;
+}
+function layout(){document.querySelectorAll(".grid").forEach(g=>{let H=BASE;for(let i=0;i<6;i++){const need=draw(g,H);if(!need)break;H=Math.ceil(Math.max(need,H+10))}})}
+layout();let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(layout,150)});
+</script>
+</body>
+</html>
